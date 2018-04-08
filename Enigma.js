@@ -1,17 +1,18 @@
 class Plugboard {
 	constructor (pairArray) {
 		var alphabet = '', cipher = '';
-		pairArray.forEach((pair) =>  { alphabet += pair[0]; cipher += pair[1] });
+		pairArray.forEach((pair) =>  {
+			alphabet += pair[0];
+			cipher += pair[1]
+			alphabet += pair[1];
+			cipher += pair[0]
+		});
 		this.alphabet = alphabet;
 		this.cipher = cipher;
 	}
 
 	encode (c) {
 		return Enigma.encode(c, this.alphabet, this.cipher, true);
-	}
-
-	decode (c) {
-		return Enigma.encode(c, this.cipher, this.alphabet, true);
 	}
 }
 
@@ -24,24 +25,22 @@ class Rotor {
 	}
 
 	isAtNotch () {
-		return this.rotor.notch.indexOf(this.rotor.cipher[this.position]) !== -1;
+		return this.rotor.notch.indexOf(this.alphabet[this.position]) !== -1;
 	}
 
 	step () {
 		this.position++;
-		if (this.position > this.rotor.cipher.length) {
+		if (this.position >= this.rotor.cipher.length) {
 			this.position = 0;
 		}
 	}
 
 	encode (c) {
 		return this.cipher[(this.alphabet.indexOf(c) + this.position) % this.alphabet.length];
-		return Enigma.encode(c, this.alphabet, this.cipher);
 	}
 
 	decode (c) {
 		return this.alphabet[(this.cipher.indexOf(c) - this.position + this.alphabet.length) % this.alphabet.length];
-		return Enigma.encode(c, this.cipher, this.alphabet);
 	}
 }
 
@@ -54,10 +53,6 @@ class Reflector {
 	encode (c) {
 		return Enigma.encode(c, this.alphabet, this.cipher);
 	}
-
-	decode (c) {
-		return Enigma.encode(c, this.cipher, this.alphabet);
-	}
 }
 
 class Enigma {
@@ -67,25 +62,17 @@ class Enigma {
 		this.plugboard = plugboard;
 	}
 
-	encode (ch) {
-		var c = ch;
-		var c1, c2, c3, c4, c5 = [];
+	encode (c) {
 		/*
 		 *  enigma encoding process:
 		 *	plugboard, rotors, reflector, reverse rotors, plubgoard again
 		 */
 		this.step();
-		this.rotors.forEach((rotor) => c5.push(rotor.position));
-		c1 = c = this.plugboard.encode(c);
+		c = this.plugboard.encode(c);
 		this.rotors.map((rotor) => c = rotor.encode(c));
-		c2 = c;
-		c3 = c = this.reflector.encode(c);
-		this.rotors.reverse().map((rotor) => c = rotor.decode(c));
-		this.rotors.reverse();  // 
-		c4 = c;
-		c = this.plugboard.decode(c);  // is it encode or decode?
-		// debug
-		console.log(ch, '->', c1, '->', c2, '->', c3, '->', c4, '->', c, 'rotors', c5.join('/'));
+		c = this.reflector.encode(c);
+		this.rotors.reverse().slice().map((rotor) => c = rotor.decode(c));
+		c = this.plugboard.encode(c);
 		return c;
 	}
 
@@ -104,7 +91,7 @@ class Enigma {
 	// and https://github.com/mikaoj/EnigmaKit/blob/master/Sources/EnigmaKit
 	static get availableRotors() {
 		return {
-			//                 ABCDEFGHIJKLMNOPQRSTUVWXYZ
+			//   first wheel:  ABCDEFGHIJKLMNOPQRSTUVWXYZ
 			'I':	{ cipher: 'EKMFLGDQVZNTOWYHXUSPAIBRCJ', notch: 'Q' },
 			'II':	{ cipher: 'AJDKSIRUXBLHWTMCQGZNPYFVOE', notch: 'E' },
 			'III':	{ cipher: 'BDFHJLCPRTXVZNYEIWGAKMUSQO', notch: 'V' },
