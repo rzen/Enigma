@@ -1,0 +1,62 @@
+<html>
+	<body>
+		<h1>Enigma JS Encoder</h1>
+		<p><a href="https://github.com/rzen/Enigma/">More info</a></p>
+
+		<style type="text/css">
+			div { font-family: monospace; }
+		</style>
+
+		<script type="text/javascript" src="Enigma.js"></script>
+
+		<h2>Example plain text</h2>
+		<div id="plain-text">Loading..</div>
+		<h2>Cypher text</h2>
+		<div id="cypher-text">Encrypting..</div>
+		<h2>Decyphered text</h2>
+		<div id="decyphered-text">Decoding..</div>
+
+
+		<script type="text/javascript">
+			let out = function (s, id) {
+				var t = s.match(/(.{1,5})/g).join(' ');
+				console.log(t);
+				document.getElementById(id).innerHTML = t;
+			}
+
+			let enigmaBob = new Enigma(
+					[
+						new Rotor('I', 5),
+						new Rotor('II', 9),
+						new Rotor('III', 13)
+					],
+					new Reflector('A'),
+					new Plugboard([])
+				);
+
+			var plainText = "WEATHERXXREPORT";
+				cypherText = '';
+
+			plainText.split('').map( (c) => cypherText += enigmaBob.encode(c) );
+
+			out(plainText, 'plain-text')
+			out(cypherText, 'cypher-text')
+
+			let enigmaAlice = new Enigma(
+					[
+						new Rotor('I', 5),
+						new Rotor('II', 9),
+						new Rotor('III', 13)
+					],
+					new Reflector('A'),
+					new Plugboard([])
+				);
+
+			plainText = '';
+			cypherText.split('').map( (c) => plainText += enigmaAlice.encode(c) );
+
+			out(plainText, 'decyphered-text')
+		</script>
+
+	</body>
+</html>
