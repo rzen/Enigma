@@ -12,7 +12,8 @@ class Plugboard {
 	}
 
 	encode (c) {
-		return Enigma.encode(c, this.alphabet, this.cipher, true);
+		if (this.alphabet.indexOf(c) === -1) return c;
+		return Enigma.encode(c, this.alphabet, this.cipher);
 	}
 }
 
@@ -121,16 +122,9 @@ class Enigma {
 		return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	}
 
-	static encode (c, alphabet, cipher, bypassAlphabetCheck) {
-		if (alphabet.indexOf(c) === -1) {
-			if (bypassAlphabetCheck) {
-				return c;
-			} else {
-				throw 'Character ' + c + ' isnt avaiable in alphabet ' + alphabet;
-			}
-		} else {
-			return cipher[alphabet.indexOf(c)];
-		}
+	static encode (c, alphabet, cipher) {
+		if (alphabet.indexOf(c) === -1) throw 'Character ' + c + ' isnt avaiable in alphabet ' + alphabet;
+		return cipher[alphabet.indexOf(c)];
 	}
 }
 
