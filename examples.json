@@ -1,0 +1,15 @@
+[
+	{
+		"reflector": "B",
+		"greek": "C",
+		"rotors": "438",
+		"positions": "KPVG",
+		"rings": "AACU",
+		"plugs": [ "CH","EJ","NV","OU","TY","LG","SZ","PK","DI","QB" ],
+		"plainText": "LEITUNGVONVONEINSNEUNXUUUFLOTTFFFTTTEINSZWOZWOVIERYYSEZHSZWOHIERGELOESTXVERSCHLUESSELTNACHRRRHHHVVVXINHALTXXUUUCAAKKKVONVONWOEWEZWONXEINSDREIEINSFUENFBHRANSTEUERUNGSLONNEJFEHMARNSUEDWESTJU",
+		"cipherText": "DUNKCANQMIGSFKQXUWSTQDKQESDJGKYYWBSKXAXCGZMUTAKEQBNQWXENUXTDFOJNEPDJMIRZGGAAAMKWZMFKOSKOYEBKFFPDIMTLGYAQSRZGQVODYLSFEBCEWHBVLFHYWCRONYFUFVOZVFORZSQIMSRCXSRZQFWZUATZDOAMPMFOWXNMCDIYYMTYXBNL",
+		"interpretation": "[An] Leitung von 19. U-Flottille: F.T. [mit Uhrzeitgruppe/Leitnummer] 1224/62 hier gelöst. Verschlüsselt nach RHV [Reservehandverfahren]. Inhalt: [An] UAK von [Loewe? Moewe?] 2: 1315 Uhr Ansteuerungstonne “Fehmarn Südwest”.",
+		"translation": "[To] Control from 19th Submarine Flotilla: Radiogram [with time group/serial number] 1224/62 solved here. Enciphered according to RHV [Reserve Hand Procedure]. Contents: [To] UAK from [Loewe? Moewe?] 2: [At] 1315 hours [will be at] approach-buoy “Fehmarn Southwest”.",
+		"source": "https://enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030689"
+	}
+]

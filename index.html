@@ -24,14 +24,21 @@
 				document.getElementById(id).innerHTML = t;
 			}
 
+			const
+				ROTOR1 = 'I',  POS1 = 7,
+				ROTOR2 = 'IV', POS2 = 11,
+				ROTOR3 = 'V',  POS3 = 17
+				REFLECTOR = 'A',
+				PLUGS = ['AB'];
+
 			let enigmaBob = new Enigma(
 					[
-						new Rotor('I', 5),
-						new Rotor('II', 9),
-						new Rotor('III', 13)
+						new Rotor(ROTOR1, POS1),
+						new Rotor(ROTOR2, POS2),
+						new Rotor(ROTOR3, POS3)
 					],
-					new Reflector('A'),
-					new Plugboard([])
+					new Reflector(REFLECTOR),
+					new Plugboard(PLUGS)
 				);
 
 			var plainText = "WEATHERXXREPORT";
@@ -44,12 +51,12 @@
 
 			let enigmaAlice = new Enigma(
 					[
-						new Rotor('I', 5),
-						new Rotor('II', 9),
-						new Rotor('III', 13)
+						new Rotor(ROTOR1, POS1),
+						new Rotor(ROTOR2, POS2),
+						new Rotor(ROTOR3, POS3)
 					],
-					new Reflector('A'),
-					new Plugboard([])
+					new Reflector(REFLECTOR),
+					new Plugboard(PLUGS)
 				);
 
 			plainText = '';
